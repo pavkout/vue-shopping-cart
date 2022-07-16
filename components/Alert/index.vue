@@ -53,8 +53,11 @@
                   {{ description }}
                 </p>
                 <div class="flex flex-col justify-end gap-3 mt-6 sm:flex-row">
-                  <button class="px-6 py-2 rounded-sm">No</button>
+                  <button @click="onReject" class="px-6 py-2 rounded-sm">
+                    No
+                  </button>
                   <button
+                    @click="onConfirm"
                     class="px-6 py-2 rounded-sm shadow-sm dark:bg-purple-400 dark:text-gray-900"
                   >
                     Yes
