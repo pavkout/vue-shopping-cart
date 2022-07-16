@@ -48,7 +48,8 @@ import ItemQuantity from '../ItemQuantity/index.vue';
 import { formatPrice, calculateAmountWithQuantity } from '../../utils/index.ts';
 
 export default {
-  props: ['product', 'onDelete'],
+  props: ['product'],
+  emits: ['delete-product'],
   components: {
     ItemQuantity,
   },
@@ -61,6 +62,11 @@ export default {
       );
 
       return formatPrice(this.product.recommendedRetailPriceCurrency, amount);
+    },
+  },
+  methods: {
+    onDelete() {
+      this.$emit('delete-product');
     },
   },
 };

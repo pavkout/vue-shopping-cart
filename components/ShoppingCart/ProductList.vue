@@ -7,7 +7,7 @@
           <li v-for="product in cartList" :key="product.gtin" class="flex py-6">
             <product-cart-item
               :product="product"
-              :onDelete="onDelete"
+              @delete-product="onDelete(product)"
             ></product-cart-item>
           </li>
         </ul>
@@ -15,6 +15,8 @@
           :open="open"
           title="Delete Product"
           description="Are you sure you want to delete the product? This action cannot be undone."
+          :onConfirm="onDeleteConfirm"
+          :onReject="onDeleteReject"
         ></v-alert>
       </div>
     </div>
@@ -25,6 +27,7 @@
 import VAlert from '../Alert/index.vue';
 import ProductCartItem from './ProductCartItem.vue';
 import EmptyCart from './EmptyCart.vue';
+
 import { useShoppingStore } from '../../store/shoppingCart';
 
 export default {
@@ -46,9 +49,20 @@ export default {
     cartList() {
       return useShoppingStore().getCart;
     },
-    onDelete() {
+  },
+  methods: {
+    onDelete(product) {
       this.deletedProduct = { name: product.name, gtin: product.gtin };
       this.open = true;
+    },
+    onDeleteConfirm() {
+      if (this.deletedProduct) {
+        this.open = false;
+        useShoppingStore().removeFromCart(this.deletedProduct.gtin);
+      }
+    },
+    onDeleteReject() {
+      this.open = false;
     },
   },
 };
