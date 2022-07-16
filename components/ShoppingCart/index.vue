@@ -81,5 +81,10 @@ export default {
     ProductList,
     CartFooter,
   },
+  methods: {
+    onClose() {
+      useShoppingStore().closeCart();
+    },
+  },
 };
 </script>

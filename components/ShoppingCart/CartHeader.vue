@@ -6,8 +6,8 @@
     <div class="ml-3 flex h-7 items-center">
       <button
         type="button"
-        class="-m-2 p-2 text-gray-400 hover:text-gray-500"
         @click="onClose"
+        class="-m-2 p-2 text-gray-400 hover:text-gray-500"
       >
         <span class="sr-only">Close panel</span>
         <XIcon class="h-6 w-6" aria-hidden="true" />
@@ -28,8 +28,7 @@ export default {
   },
   methods: {
     onClose() {
-      const store = useShoppingStore();
-      store.closeCart();
+      useShoppingStore().closeCart();
     },
   },
 };
