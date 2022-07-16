@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot as="template" :show="open">
-    <Dialog as="div" class="relative z-10" @close="open = false">
+  <TransitionRoot as="template" :show="open" v-if="open">
+    <Dialog as="div" class="relative z-10" @close="onClose">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
@@ -37,7 +37,7 @@
                 <button
                   type="button"
                   class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
-                  @click="open = false"
+                  @click="onClose"
                 >
                   <span class="sr-only">Close</span>
                   <XIcon class="h-6 w-6" aria-hidden="true" />
@@ -80,7 +80,7 @@
                               v-for="rating in [0, 1, 2, 3, 4]"
                               :key="rating"
                               :class="[
-                                product.rating > rating
+                                ratingStars > rating
                                   ? 'text-gray-900 dark:text-gray-200'
                                   : 'text-gray-200 dark:text-gray-700',
                                 'h-5 w-5 flex-shrink-0',
@@ -114,11 +114,15 @@
                         className="flex justify-center items-center mt-6 gap-4"
                       >
                         <item-quantity
+                          internalState="true"
                           :gtin="product.gtin"
-                          :quantity="product.quantity"
+                          :quantity="selectedQuantity"
+                          @increase-quantity="addQuantity"
+                          @subtract-quantity="subtractQuantity"
                         ></item-quantity>
                         <button
                           type="submit"
+                          @click="onAddProduct"
                           class="w-3/4 bg-purple-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 select-none"
                         >
                           Add to Cart
@@ -151,8 +155,15 @@ import { StarIcon } from '@heroicons/vue/solid';
 import { formatPrice } from '../../utils/index.ts';
 import ItemQuantity from '../ItemQuantity/index.vue';
 
+import { useShoppingStore } from '../../store/shoppingCart';
+
 export default {
-  props: ['open', 'ratingStars', 'reviewsNum', 'product'],
+  props: ['open', 'ratingStars', 'reviewsNum'],
+  data() {
+    return {
+      selectedQuantity: 1,
+    };
+  },
   components: {
     Dialog,
     DialogPanel,
@@ -166,11 +177,42 @@ export default {
     StarIcon,
   },
   computed: {
+    product() {
+      return useShoppingStore().getSelectedProduct;
+    },
     formatedPrice() {
       return formatPrice(
         this.product.recommendedRetailPriceCurrency,
         this.product.recommendedRetailPrice
       );
+    },
+  },
+  methods: {
+    addQuantity() {
+      this.selectedQuantity++;
+    },
+    subtractQuantity() {
+      this.selectedQuantity--;
+    },
+    onAddProduct() {
+      // Update the cart list.
+      useShoppingStore().addToCart({
+        ...this.product,
+        quantity: this.selectedQuantity,
+      });
+
+      // Reset the quantity data.
+      this.selectedQuantity = 1;
+
+      // Reset the selected product.
+      useShoppingStore().resetProduct();
+    },
+    onClose() {
+      // Reset the selected product.
+      useShoppingStore().resetProduct();
+
+      // Reset the quantity data.
+      this.selectedQuantity = 1;
     },
   },
 };

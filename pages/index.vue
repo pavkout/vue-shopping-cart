@@ -19,7 +19,6 @@
       :open="open"
       :ratingStars="ratingStars"
       :reviewsNum="reviewsNum"
-      :product="{}"
     ></product-modal>
     <shopping-cart></shopping-cart>
   </div>
@@ -34,6 +33,8 @@ import Pagination from '../components/Pagination/index.vue';
 import { generateRandom } from '../utils/index.ts';
 import { getPage } from '../server/api/index.ts';
 
+import { useShoppingStore } from '../store/shoppingCart';
+
 export default {
   data() {
     return {
@@ -45,7 +46,7 @@ export default {
   },
   computed: {
     open() {
-      return false; //$route.query.id;
+      return useShoppingStore().getSelectedProduct !== null;
     },
     ratingStars() {
       return generateRandom(1, 5, 1);

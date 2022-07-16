@@ -16,6 +16,7 @@ const state = (): IState => ({
   totalItems: 0,
   totalPrice: 0,
   isCartOpen: false,
+  selectedProduct: null,
 });
 
 const getters = {
@@ -30,6 +31,9 @@ const getters = {
   },
   getIsCartOpen(state: IState) {
     return state.isCartOpen;
+  },
+  getSelectedProduct(state: IState) {
+    return state.selectedProduct;
   },
 };
 
@@ -76,6 +80,12 @@ const actions = {
       this.totalPrice,
       product?.recommendedRetailPrice
     );
+  },
+  selectProduct(product: Product) {
+    this.selectedProduct = product;
+  },
+  resetProduct() {
+    this.selectedProduct = null;
   },
   resetCart() {
     this.cart = [];
