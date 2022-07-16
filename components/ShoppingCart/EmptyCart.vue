@@ -1,6 +1,6 @@
 <template>
   <div
-    className="flex flex-col items-center justify-center text-center pt-20 text-gray-900 dark:text-gray-200"
+    class="flex flex-col items-center justify-center text-center pt-20 text-gray-900 dark:text-gray-200"
   >
     <img
       alt="Empty Cart Image"
