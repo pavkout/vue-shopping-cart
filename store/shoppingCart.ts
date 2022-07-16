@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useToast } from 'vue-toastification';
+import { getData, setData } from 'nuxt-storage/local-storage';
 
 import { IState, Product } from '../types/types';
 import {
@@ -15,13 +16,15 @@ import {
 
 const toast = useToast();
 
-const state = (): IState => ({
+const initialState: IState = {
   cart: [],
   totalItems: 0,
   totalPrice: 0,
   isCartOpen: false,
   selectedProduct: null,
-});
+};
+
+const state = (): IState => initialState;
 
 const getters = {
   getCart(state: IState) {
@@ -51,6 +54,8 @@ const actions = {
       product.quantity
     );
     toast.success(`${product.name} has successfully added to the cart.`);
+
+    this.updateLocalStorage();
   },
   removeFromCart(gtin: string) {
     // Find the product in order to get the quantity.
@@ -64,6 +69,8 @@ const actions = {
       product?.quantity
     );
     toast.info(`${product.name} has successfully removed from the cart.`);
+
+    this.updateLocalStorage();
   },
   increaseCartQuantity(gtin: string) {
     // Find the product in order to get the quantity.
@@ -75,6 +82,8 @@ const actions = {
       this.totalPrice,
       product?.recommendedRetailPrice
     );
+
+    this.updateLocalStorage();
   },
   subtractCartQuantity(gtin: string) {
     // Find the product in order to get the quantity.
@@ -86,6 +95,8 @@ const actions = {
       this.totalPrice,
       product?.recommendedRetailPrice
     );
+
+    this.updateLocalStorage();
   },
   selectProduct(product: Product) {
     this.selectedProduct = product;
@@ -100,6 +111,19 @@ const actions = {
     this.isCartOpen = false;
 
     toast.info('The cart has successfully erased.');
+
+    this.updateLocalStorage(initialState);
+  },
+  updateLocalStorage(state?: IState) {
+    const savedCart = state || {
+      cart: this.cart,
+      totalItems: this.totalItems,
+      totalPrice: this.totalPrice,
+      isCartOpen: false,
+      selectedProduct: null,
+    };
+
+    setData('savedCart', savedCart, 3, 'h');
   },
   openCart() {
     this.isCartOpen = true;
@@ -107,11 +131,15 @@ const actions = {
   closeCart() {
     this.isCartOpen = false;
   },
-  initCart(state: IState) {
-    this.cart = state.cart;
-    this.totalItems = state.totalItems;
-    this.totalPrice = state.totalPrice;
-    this.isCartOpen = state.isCartOpen;
+  initCart() {
+    const state: IState = getData('savedCart') || undefined;
+
+    if (state) {
+      this.cart = state.cart;
+      this.totalItems = state.totalItems;
+      this.totalPrice = state.totalPrice;
+      this.isCartOpen = state.isCartOpen;
+    }
   },
 };
 

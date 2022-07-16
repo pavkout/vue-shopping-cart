@@ -43,6 +43,7 @@ export default {
   },
   created() {
     this.products = getPage(1);
+    useShoppingStore().initCart();
   },
   computed: {
     open() {
