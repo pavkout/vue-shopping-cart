@@ -59,25 +59,33 @@ export default {
     },
   },
   mounted() {
-    console.log(getData('theme'));
     if (getData('theme') === undefined) {
       if (
         window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches
       ) {
-        setData('theme', 'dark');
+        setData('theme', 'dark', 24, 'h');
         useThemeStore().setDark(true);
+        document.documentElement.classList.add('dark');
       } else {
-        setData('theme', 'light');
+        setData('theme', 'light', 24, 'h');
+        document.documentElement.classList.remove('dark');
       }
     } else {
-      useThemeStore().setDark(getData('theme') === 'dark');
+      const isDark = getData('theme') === 'dark';
+      useThemeStore().setDark(isDark);
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add(isDark ? 'dark' : 'light');
     }
   },
   methods: {
     toggleDarkMode() {
       useThemeStore().setDark(!this.dark);
-      setData('theme', this.dark ? 'dark' : 'light');
+      setData('theme', this.dark ? 'dark' : 'light', 24, 'h');
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add(this.dark ? 'dark' : 'light');
     },
   },
 };
