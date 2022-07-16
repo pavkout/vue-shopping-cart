@@ -23,6 +23,7 @@
       </p>
     </div>
     <button
+      @click="addProductToCart(product)"
       class="absolute -bottom-4 -right-4 w-16 h-16 rounded-full bg-purple-500 pl-4 text-white shadow disabled:opacity-60 hover:opacity-80 text-2xl"
     >
       <ShoppingCartIcon class="h-6 w-6" aria-hidden="true" />
@@ -33,6 +34,7 @@
 <script>
 import { ShoppingCartIcon } from '@heroicons/vue/outline';
 import { formatPrice } from '../../utils/index.ts';
+import { useShoppingStore } from '../../store/shoppingCart';
 
 export default {
   props: ['product'],
@@ -45,6 +47,11 @@ export default {
         this.product.recommendedRetailPriceCurrency,
         this.product.recommendedRetailPrice
       );
+    },
+  },
+  methods: {
+    addProductToCart(product) {
+      useShoppingStore().addToCart(product);
     },
   },
 };
