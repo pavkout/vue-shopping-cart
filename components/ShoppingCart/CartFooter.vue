@@ -26,6 +26,7 @@
           v-if="totalItems > 0"
           type="button"
           class="font-medium text-gray-400 hover:text-gray-500"
+          @click="onErase"
         >
           Erase Cart
         </button>
@@ -41,9 +42,11 @@
       </p>
     </div>
     <v-alert
-      :open="false"
+      :open="open"
       title="Erase Cart"
       description="Are you sure you want to erase your cart? All of your data will be permanently removed. This action cannot be undone."
+      @confirm="onEraseConfirm"
+      @reject="onEraseReject"
     ></v-alert>
   </div>
 </template>
@@ -55,6 +58,11 @@ import { formatPrice } from '../../utils/index.ts';
 import { useShoppingStore } from '../../store/shoppingCart';
 
 export default {
+  data() {
+    return {
+      open: false,
+    };
+  },
   components: {
     VAlert,
   },
@@ -79,6 +87,16 @@ export default {
   methods: {
     onClose() {
       useShoppingStore().closeCart();
+    },
+    onErase() {
+      this.open = true;
+    },
+    onEraseConfirm() {
+      this.open = false;
+      useShoppingStore().resetCart();
+    },
+    onEraseReject() {
+      this.open = false;
     },
   },
 };

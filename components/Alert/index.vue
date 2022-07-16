@@ -81,12 +81,21 @@ import {
 } from '@headlessui/vue';
 
 export default {
-  props: ['open', 'title', 'description', 'onConfirm', 'onReject'],
+  props: ['open', 'title', 'description'],
+  emits: ['confirm', 'reject'],
   components: {
     Dialog,
     DialogPanel,
     TransitionChild,
     TransitionRoot,
+  },
+  methods: {
+    onReject() {
+      this.$emit('reject');
+    },
+    onConfirm() {
+      this.$emit('confirm');
+    },
   },
 };
 </script>

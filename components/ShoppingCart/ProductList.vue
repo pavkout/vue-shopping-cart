@@ -15,8 +15,8 @@
           :open="open"
           title="Delete Product"
           description="Are you sure you want to delete the product? This action cannot be undone."
-          :onConfirm="onDeleteConfirm"
-          :onReject="onDeleteReject"
+          @confirm="onDeleteConfirm"
+          @reject="onDeleteReject"
         ></v-alert>
       </div>
     </div>
