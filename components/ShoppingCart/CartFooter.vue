@@ -14,6 +14,7 @@
         aria-label="Checkout"
         :disabled="isCheckoutDisabled"
         :class="checkoutClasses"
+        @click="onClose"
       >
         Checkout
       </button>
