@@ -11,16 +11,16 @@
     </p>
     <div class="mt-6">
       <button
-        disabled="totalItems === 0"
         aria-label="Checkout"
-        class="totalItems === 0 ? 'bg-gray-400 cursor-not-allowed' : '' flex items-center justify-center w-full rounded-md border border-transparent bg-purple-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-purple-700'"
+        :disabled="isCheckoutDisabled"
+        :class="checkoutClasses"
       >
         Checkout
       </button>
     </div>
     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
       <p>
-        <span v-if="totalItems > 0">or</span>
+        <span v-if="totalItems > 0">or {{ ' ' }}</span>
         <button
           v-if="totalItems > 0"
           type="button"
@@ -50,6 +50,7 @@
 <script>
 import VAlert from '../Alert/index.vue';
 import { formatPrice } from '../../utils/index.ts';
+
 import { useShoppingStore } from '../../store/shoppingCart';
 
 export default {
@@ -57,14 +58,26 @@ export default {
     VAlert,
   },
   computed: {
+    totalItems() {
+      return useShoppingStore().getTotalItems;
+    },
     formatedPrice() {
-      return formatPrice('€', 55); //totalPrice);
+      return formatPrice('€', useShoppingStore().getTotalPrice);
+    },
+    isCheckoutDisabled() {
+      return this.totalItems === 0;
+    },
+    checkoutClasses() {
+      return {
+        'flex items-center justify-center w-full rounded-md border border-transparent bg-purple-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-purple-700': true,
+        'bg-gray-400 cursor-not-allowed hover:bg-gray-400':
+          this.totalItems === 0,
+      };
     },
   },
   methods: {
     onClose() {
-      const store = useShoppingStore();
-      store.closeCart();
+      useShoppingStore().closeCart();
     },
   },
 };
