@@ -1,6 +1,6 @@
 <template>
   <div
-    className="sm:bg-center lg:bg-center bg-top bg-cover sm:bg-fixed lg:bg-fixed bg-no-repeat md:w-full sm:h-3/4 lg:h-3/4 h-2/4 bg-image"
+    class="sm:bg-center lg:bg-center bg-top bg-cover sm:bg-fixed lg:bg-fixed bg-no-repeat md:w-full sm:h-3/4 lg:h-3/4 h-2/4 bg-image"
   />
 </template>
 

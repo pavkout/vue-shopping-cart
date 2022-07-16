@@ -67,7 +67,7 @@
                         Product information
                       </h3>
 
-                      <p className="text-2xl text-gray-900 dark:text-gray-200">
+                      <p class="text-2xl text-gray-900 dark:text-gray-200">
                         {{ formatedPrice }}
                       </p>
 
@@ -104,15 +104,13 @@
                       <h3 id="options-heading" class="sr-only">
                         Product options
                       </h3>
-                      <p className="mt-1 text-sm text-gray-500">
+                      <p class="mt-1 text-sm text-gray-500">
                         Brand: {{ product.brandName }}
                       </p>
-                      <p className="mt-1 text-sm text-gray-500">
+                      <p class="mt-1 text-sm text-gray-500">
                         Category: {{ product.categoryName }}
                       </p>
-                      <div
-                        className="flex justify-center items-center mt-6 gap-4"
-                      >
+                      <div class="flex justify-center items-center mt-6 gap-4">
                         <item-quantity
                           internalState="true"
                           :gtin="product.gtin"
