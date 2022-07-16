@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     addProductToCart(product) {
-      useShoppingStore().addToCart(product);
+      useShoppingStore().addToCart({ ...product, quantity: 1 });
     },
   },
 };
