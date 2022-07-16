@@ -12,18 +12,18 @@
       />
     </figure>
     <div class="flex justify-between">
-      <nuxt-link :to="`product/${product.gtin}`">
+      <div role="button" :aria-label="product.name" @click="onSelectProduct">
         <h2 class="text-md text-gray-700 pr-4 dark:text-gray-200">
           <span aria-hidden="true" class="absolute inset-0" />
           {{ product.name }}
         </h2>
-      </nuxt-link>
+      </div>
       <p class="text-md font-medium text-gray-900 dark:text-gray-400">
         {{ getFormatedPrice }}
       </p>
     </div>
     <button
-      @click="addProductToCart(product)"
+      @click="addProductToCart"
       class="absolute -bottom-4 -right-4 w-16 h-16 rounded-full bg-purple-500 pl-4 text-white shadow disabled:opacity-60 hover:opacity-80 text-2xl"
     >
       <ShoppingCartIcon class="h-6 w-6" aria-hidden="true" />
@@ -50,8 +50,11 @@ export default {
     },
   },
   methods: {
-    addProductToCart(product) {
-      useShoppingStore().addToCart({ ...product, quantity: 1 });
+    addProductToCart() {
+      useShoppingStore().addToCart({ ...this.product, quantity: 1 });
+    },
+    onSelectProduct() {
+      useShoppingStore().selectProduct(this.product);
     },
   },
 };
