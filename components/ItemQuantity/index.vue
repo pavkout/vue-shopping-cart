@@ -2,19 +2,19 @@
   <div class="h-8 flex">
     <div
       class="h-8 w-8 border-2 rounded-full cursor-pointer flex items-center justify-center"
-      @click="subtractQuantityFromCart;"
+      @click="subtractQuantityFromCart"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-4 w-4"
         fill="none"
-        view-box="0 0 24 24"
+        viewBox="0 0 24 24"
         stroke="gray"
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           d="M20 12H4"
         />
       </svg>
@@ -34,13 +34,13 @@
         xmlns="http://www.w3.org/2000/svg"
         class="h-4 w-4"
         fill="none"
-        view-box="0 0 24 24"
+        viewBox="0 0 24 24"
         stroke="gray"
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           d="M12 6v6m0 0v6m0-6h6m-6 0H6"
         />
       </svg>
