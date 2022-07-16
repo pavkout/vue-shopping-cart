@@ -49,12 +49,26 @@
 </template>
 
 <script>
+import { useShoppingStore } from '../../store/shoppingCart';
+
 export default {
-  props: ['gtin', 'quantity', 'onIncrease', 'onSubtract'],
-  computed: {},
+  props: ['gtin', 'quantity', 'internalState'],
+  emits: ['increase-quantity', 'subtract-quantity'],
   methods: {
-    addQuantityToCart() {},
-    subtractQuantityFromCart() {},
+    addQuantityToCart() {
+      if (this.internalState) {
+        this.$emit('increase-quantity');
+      } else {
+        useShoppingStore().increaseCartQuantity(this.gtin);
+      }
+    },
+    subtractQuantityFromCart() {
+      if (this.internalState) {
+        this.$emit('subtract-quantity');
+      } else {
+        useShoppingStore().subtractCartQuantity(this.gtin);
+      }
+    },
   },
 };
 </script>
