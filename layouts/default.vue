@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="h-screen relative dark:bg-gray-900"
-    :class="dark ? 'dark' : 'light'"
-  >
+  <div class="h-screen max-h-screen relative dark:bg-gray-900">
     <v-header></v-header>
     <hero-image></hero-image>
     <slot></slot>
@@ -25,11 +22,6 @@ export default {
     VFooter,
     HeroImage,
     ThemeSwitcher,
-  },
-  computed: {
-    dark() {
-      return useThemeStore().getDark;
-    },
   },
 };
 </script>
