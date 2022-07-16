@@ -5,7 +5,10 @@
 </template>
 
 <script setup>
-definePageMeta({
+useHead({
   title: 'Pavlos Koutoglou',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  charset: 'utf-8',
+  meta: [{ name: 'description', content: 'My amazing shopping cart.' }],
 });
 </script>
