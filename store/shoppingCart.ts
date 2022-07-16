@@ -123,7 +123,7 @@ const actions = {
       selectedProduct: null,
     };
 
-    setData('savedCart', savedCart, 3, 'h');
+    setData('savedCart', savedCart, 24, 'h');
   },
   openCart() {
     this.isCartOpen = true;
