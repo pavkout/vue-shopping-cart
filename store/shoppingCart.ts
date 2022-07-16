@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import { useToast } from 'vue-toastification';
+
 import { IState, Product } from '../types/types';
 import {
   addProductToCart,
@@ -10,6 +12,8 @@ import {
   subtractQuantity,
   subtractTotalPrice,
 } from '../utils/storeHelpers';
+
+const toast = useToast();
 
 const state = (): IState => ({
   cart: [],
@@ -46,6 +50,7 @@ const actions = {
       product.recommendedRetailPrice,
       product.quantity
     );
+    toast.success(`${product.name} has successfully added to the cart.`);
   },
   removeFromCart(gtin: string) {
     // Find the product in order to get the quantity.
@@ -58,6 +63,7 @@ const actions = {
       product?.recommendedRetailPrice,
       product?.quantity
     );
+    toast.info(`${product.name} has successfully removed from the cart.`);
   },
   increaseCartQuantity(gtin: string) {
     // Find the product in order to get the quantity.
@@ -92,6 +98,8 @@ const actions = {
     this.totalItems = 0;
     this.totalPrice = 0;
     this.isCartOpen = false;
+
+    toast.info('The cart has successfully erased.');
   },
   openCart() {
     this.isCartOpen = true;
