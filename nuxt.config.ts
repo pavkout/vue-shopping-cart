@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     shim: false,
     typeCheck: true,
   },
-  css: ['@/assets/css/styles.css'],
+  css: ['@/assets/css/styles.css', 'vue-toastification/dist/index.css'],
   build: {
     postcss: {
       postcssOptions: {
