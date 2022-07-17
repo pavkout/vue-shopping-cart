@@ -148,8 +148,8 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue';
-import { XIcon } from '@heroicons/vue/outline';
-import { StarIcon } from '@heroicons/vue/solid';
+import { XIcon } from '@heroicons/vue/outline/index.js';
+import { StarIcon } from '@heroicons/vue/solid/index.js';
 import { formatPrice } from '../../utils/index';
 import ItemQuantity from '../ItemQuantity/index.vue';
 import { Product } from '../../types/types';

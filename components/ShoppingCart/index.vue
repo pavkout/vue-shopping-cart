@@ -57,7 +57,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue';
-import { XIcon } from '@heroicons/vue/outline';
+import { XIcon } from '@heroicons/vue/outline/index.js';
 import CartHeader from './CartHeader.vue';
 import ProductList from './ProductList.vue';
 import CartFooter from './CartFooter.vue';

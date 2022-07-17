@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { DialogTitle } from '@headlessui/vue';
-import { XIcon } from '@heroicons/vue/outline';
+import { XIcon } from '@heroicons/vue/outline/index.js';
 import { useShoppingStore } from '../../store/shoppingCart';
 
 export default {

@@ -34,7 +34,7 @@
 <script lang="ts">
 import { PropType } from 'vue';
 
-import { ShoppingCartIcon } from '@heroicons/vue/outline';
+import { ShoppingCartIcon } from '@heroicons/vue/outline/index.js';
 
 import { useShoppingStore } from '../../store/shoppingCart';
 
