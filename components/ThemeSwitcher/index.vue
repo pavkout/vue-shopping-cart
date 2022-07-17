@@ -37,9 +37,10 @@
 </template>
 
 <script lang="ts">
-import { getData, setData } from 'nuxt-storage/local-storage/index.js';
+import storage from 'nuxt-storage/local-storage/index.js';
 import { useThemeStore } from '../../store/theme';
 
+const { getData, setData } = storage;
 export default {
   computed: {
     dark(): String {
