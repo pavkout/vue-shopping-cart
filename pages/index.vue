@@ -14,7 +14,7 @@
         :product="product"
       ></product-card>
     </div>
-    <pagination :numberOfPages="5" @change-page="onChange"></pagination>
+    <pagination :numberOfPages="100 / 20" @change-page="onChange"></pagination>
     <product-modal
       :open="open"
       :ratingStars="ratingStars"
