@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen max-h-screen relative dark:bg-gray-900">
+  <div class="h-full relative dark:bg-gray-900">
     <v-header></v-header>
     <hero-image></hero-image>
     <slot></slot>
