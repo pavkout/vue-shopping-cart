@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { useToast } from 'vue-toastification';
-import * as Storage from 'nuxt-storage/local-storage/index.js';
+import Storage from 'nuxt-storage/local-storage/index.js';
+
+const { getData, setData } = Storage;
 
 import { IState, Product } from '../types/types';
 import {
@@ -123,7 +125,7 @@ const actions = {
       selectedProduct: null,
     };
 
-    Storage.setData('savedCart', savedCart, 24, 'h');
+    setData('savedCart', savedCart, 24, 'h');
   },
   openCart() {
     this.isCartOpen = true;
@@ -132,7 +134,7 @@ const actions = {
     this.isCartOpen = false;
   },
   initCart() {
-    const state: IState = Storage.getData('savedCart') || undefined;
+    const state: IState = getData('savedCart') || undefined;
 
     if (state) {
       this.cart = state.cart;

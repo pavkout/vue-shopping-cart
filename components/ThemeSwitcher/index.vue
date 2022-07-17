@@ -37,7 +37,9 @@
 </template>
 
 <script lang="ts">
-import * as Storage from 'nuxt-storage/local-storage/index.js';
+import Storage from 'nuxt-storage/local-storage/index.js';
+
+const { getData, setData } = Storage;
 
 import { useThemeStore } from '../../store/theme';
 
@@ -60,20 +62,20 @@ export default {
     },
   },
   mounted(): void {
-    if (Storage.getData('theme') === undefined) {
+    if (getData('theme') === undefined) {
       if (
         window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches
       ) {
-        Storage.setData('theme', 'dark', 24, 'h');
+        setData('theme', 'dark', 24, 'h');
         useThemeStore().setDark(true);
         document.documentElement.classList.add('dark');
       } else {
-        Storage.setData('theme', 'light', 24, 'h');
+        setData('theme', 'light', 24, 'h');
         document.documentElement.classList.remove('dark');
       }
     } else {
-      const isDark = Storage.getData('theme') === 'dark';
+      const isDark = getData('theme') === 'dark';
       useThemeStore().setDark(isDark);
       document.documentElement.classList.remove('light');
       document.documentElement.classList.remove('dark');
