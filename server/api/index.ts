@@ -44,8 +44,8 @@ const handler = (
   }
 };
 
-export default defineEventHandler((event) => {
-  return {
-    api: handler,
-  };
-});
+// export default defineEventHandler((event) => {
+//   return {
+//     api: handler,
+//   };
+// });
