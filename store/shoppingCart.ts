@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { useToast } from 'vue-toastification';
-import { getData, setData } from 'nuxt-storage/local-storage';
+import { getData, setData } from 'nuxt-storage/local-storage/index.js';
 
 import { IState, Product } from '../types/types';
 import {
