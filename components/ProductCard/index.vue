@@ -31,18 +31,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { PropType } from 'vue';
+
 import { ShoppingCartIcon } from '@heroicons/vue/outline';
-import { formatPrice } from '../../utils/index.ts';
+
 import { useShoppingStore } from '../../store/shoppingCart';
 
+import { formatPrice } from '../../utils/index';
+import { Product } from '../../types/types';
+
 export default {
-  props: ['product'],
+  props: {
+    product: { type: Object as PropType<Product>, required: true },
+  },
   components: {
     ShoppingCartIcon,
   },
   computed: {
-    getFormatedPrice() {
+    getFormatedPrice(): String {
       return formatPrice(
         this.product.recommendedRetailPriceCurrency,
         this.product.recommendedRetailPrice
@@ -50,10 +57,10 @@ export default {
     },
   },
   methods: {
-    addProductToCart() {
+    addProductToCart(): void {
       useShoppingStore().addToCart({ ...this.product, quantity: 1 });
     },
-    onSelectProduct() {
+    onSelectProduct(): void {
       useShoppingStore().selectProduct(this.product);
     },
   },

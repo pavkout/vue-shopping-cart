@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { DialogTitle } from '@headlessui/vue';
 import { XIcon } from '@heroicons/vue/outline';
 import { useShoppingStore } from '../../store/shoppingCart';
@@ -27,7 +27,7 @@ export default {
     XIcon,
   },
   methods: {
-    onClose() {
+    onClose(): void {
       useShoppingStore().closeCart();
     },
   },

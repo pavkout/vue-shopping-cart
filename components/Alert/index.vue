@@ -72,7 +72,7 @@
   </TransitionRoot>
 </template>
 
-<script>
+<script lang="ts">
 import {
   Dialog,
   DialogPanel,
@@ -81,7 +81,11 @@ import {
 } from '@headlessui/vue';
 
 export default {
-  props: ['open', 'title', 'description'],
+  props: {
+    open: { type: Boolean, default: false },
+    title: { type: String, default: '' },
+    description: { type: String, default: '' },
+  },
   emits: ['confirm', 'reject'],
   components: {
     Dialog,
@@ -90,10 +94,10 @@ export default {
     TransitionRoot,
   },
   methods: {
-    onReject() {
+    onReject(): void {
       this.$emit('reject');
     },
-    onConfirm() {
+    onConfirm(): void {
       this.$emit('confirm');
     },
   },

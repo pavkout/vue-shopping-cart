@@ -36,29 +36,29 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { getData, setData } from 'nuxt-storage/local-storage';
-import { useThemeStore } from '../../store/theme.ts';
+import { useThemeStore } from '../../store/theme';
 
 export default {
   computed: {
-    dark() {
+    dark(): String {
       return useThemeStore().getDark;
     },
-    darkIconClasses() {
+    darkIconClasses(): Object {
       return {
         'w-5 h-5': true,
         hidden: !this.dark,
       };
     },
-    lightIconClasses() {
+    lightIconClasses(): Object {
       return {
         'w-5 h-5': true,
         hidden: this.dark,
       };
     },
   },
-  mounted() {
+  mounted(): void {
     if (getData('theme') === undefined) {
       if (
         window.matchMedia &&
@@ -80,7 +80,7 @@ export default {
     }
   },
   methods: {
-    toggleDarkMode() {
+    toggleDarkMode(): void {
       useThemeStore().setDark(!this.dark);
       setData('theme', this.dark ? 'dark' : 'light', 24, 'h');
       document.documentElement.classList.remove('light');

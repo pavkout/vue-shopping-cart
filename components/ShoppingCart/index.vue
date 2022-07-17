@@ -49,7 +49,7 @@
   </TransitionRoot>
 </template>
 
-<script>
+<script lang="ts">
 import {
   Dialog,
   DialogPanel,
@@ -66,7 +66,7 @@ import { useShoppingStore } from '../../store/shoppingCart';
 
 export default {
   computed: {
-    open() {
+    open(): Boolean {
       return useShoppingStore().getIsCartOpen;
     },
   },
@@ -82,7 +82,7 @@ export default {
     CartFooter,
   },
   methods: {
-    onClose() {
+    onClose(): void {
       useShoppingStore().closeCart();
     },
   },

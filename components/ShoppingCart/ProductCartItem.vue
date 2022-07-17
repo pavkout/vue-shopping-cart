@@ -43,18 +43,23 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { PropType } from 'vue';
+
 import ItemQuantity from '../ItemQuantity/index.vue';
-import { formatPrice, calculateAmountWithQuantity } from '../../utils/index.ts';
+import { formatPrice, calculateAmountWithQuantity } from '../../utils/index';
+import { Product } from '../../types/types';
 
 export default {
-  props: ['product'],
+  props: {
+    product: { type: Object as PropType<Product>, required: true },
+  },
   emits: ['delete-product'],
   components: {
     ItemQuantity,
   },
   computed: {
-    formatedPrice() {
+    formatedPrice(): String {
       // Calculate the amount of money.
       const amount = calculateAmountWithQuantity(
         this.product.recommendedRetailPrice,
@@ -65,7 +70,7 @@ export default {
     },
   },
   methods: {
-    onDelete() {
+    onDelete(): void {
       this.$emit('delete-product');
     },
   },

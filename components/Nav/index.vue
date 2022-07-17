@@ -42,17 +42,17 @@
   </nav>
 </template>
 
-<script>
+<script lang="ts">
 import { useShoppingStore } from '../../store/shoppingCart';
 
 export default {
   computed: {
-    totalItems() {
+    totalItems(): Number {
       return useShoppingStore().getTotalItems;
     },
   },
   methods: {
-    openCart() {
+    openCart(): void {
       useShoppingStore().openCart();
     },
   },

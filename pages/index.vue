@@ -14,7 +14,7 @@
         :product="product"
       ></product-card>
     </div>
-    <pagination :numberOfPages="5" :onChange="onChange"></pagination>
+    <pagination :numberOfPages="5" @change-page="onChange"></pagination>
     <product-modal
       :open="open"
       :ratingStars="ratingStars"
@@ -24,35 +24,35 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import ShoppingCart from '../components/ShoppingCart/index.vue';
 import ProductCard from '../components/ProductCard/index.vue';
 import ProductModal from '../components/ProductModal/index.vue';
 import Pagination from '../components/Pagination/index.vue';
 
-import { generateRandom } from '../utils/index.ts';
-import { getPage } from '../server/api/index.ts';
+import { generateRandom } from '../utils/index';
+import { getPage } from '../server/api/index';
 
 import { useShoppingStore } from '../store/shoppingCart';
 
 export default {
-  data() {
+  data(): Object {
     return {
       products: [],
     };
   },
-  created() {
+  created(): void {
     this.products = getPage(1);
     useShoppingStore().initCart();
   },
   computed: {
-    open() {
+    open(): Boolean {
       return useShoppingStore().getSelectedProduct !== null;
     },
-    ratingStars() {
+    ratingStars(): Number {
       return generateRandom(1, 5, 1);
     },
-    reviewsNum() {
+    reviewsNum(): Number {
       return generateRandom(1000, 2000, 8);
     },
   },
@@ -63,7 +63,7 @@ export default {
     Pagination,
   },
   methods: {
-    onChange(i) {
+    onChange(i): void {
       this.products = getPage(i);
     },
   },

@@ -138,7 +138,7 @@
   </TransitionRoot>
 </template>
 
-<script>
+<script lang="ts">
 import {
   Dialog,
   DialogPanel,
@@ -150,14 +150,18 @@ import {
 } from '@headlessui/vue';
 import { XIcon } from '@heroicons/vue/outline';
 import { StarIcon } from '@heroicons/vue/solid';
-import { formatPrice } from '../../utils/index.ts';
+import { formatPrice } from '../../utils/index';
 import ItemQuantity from '../ItemQuantity/index.vue';
-
+import { Product } from '../../types/types';
 import { useShoppingStore } from '../../store/shoppingCart';
 
 export default {
-  props: ['open', 'ratingStars', 'reviewsNum'],
-  data() {
+  props: {
+    open: { type: Boolean, default: false },
+    ratingStars: { type: Number, default: 1 },
+    reviewsNum: { type: Number, default: 1 },
+  },
+  data(): Object {
     return {
       selectedQuantity: 1,
     };
@@ -175,10 +179,10 @@ export default {
     StarIcon,
   },
   computed: {
-    product() {
+    product(): Product {
       return useShoppingStore().getSelectedProduct;
     },
-    formatedPrice() {
+    formatedPrice(): String {
       return formatPrice(
         this.product.recommendedRetailPriceCurrency,
         this.product.recommendedRetailPrice
@@ -186,13 +190,13 @@ export default {
     },
   },
   methods: {
-    addQuantity() {
+    addQuantity(): void {
       this.selectedQuantity++;
     },
-    subtractQuantity() {
+    subtractQuantity(): void {
       this.selectedQuantity--;
     },
-    onAddProduct() {
+    onAddProduct(): void {
       // Update the cart list.
       useShoppingStore().addToCart({
         ...this.product,
@@ -205,7 +209,7 @@ export default {
       // Reset the selected product.
       useShoppingStore().resetProduct();
     },
-    onClose() {
+    onClose(): void {
       // Reset the selected product.
       useShoppingStore().resetProduct();
 

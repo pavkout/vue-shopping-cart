@@ -5,7 +5,14 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts">
 import VBanner from '../Banner/index.vue';
 import VNav from '../Nav/index.vue';
+
+export default {
+  components: {
+    VBanner,
+    VNav,
+  },
+};
 </script>

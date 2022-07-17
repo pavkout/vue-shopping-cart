@@ -83,9 +83,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  props: ['numberOfPages', 'onChange'],
+  props: {
+    numberOfPages: { type: Number, default: 1 },
+  },
+  emits: ['change-page'],
   data() {
     return {
       active: 1,
@@ -96,7 +99,7 @@ export default {
     };
   },
   computed: {
-    getPreviousClass() {
+    getPreviousClass(): Object {
       return {
         'flex items-center pt-3': true,
         'text-gray-600 hover:text-indigo-700 cursor-pointer dark:text-gray-300 dark:hover:text-indigo-700':
@@ -104,7 +107,7 @@ export default {
         'text-gray-300 cursor-default dark:text-gray-600': this.active <= 1,
       };
     },
-    getNextClass() {
+    getNextClass(): Object {
       return {
         'flex items-center pt-3': true,
         'text-gray-600 hover:text-indigo-700 cursor-pointer dark:text-gray-300 dark:hover:text-indigo-700':
@@ -115,23 +118,23 @@ export default {
     },
   },
   methods: {
-    goBack() {
+    goBack(): void {
       if (this.active > 1) {
         this.active -= 1;
-        this.onChange(this.active);
+        this.$emit('change-page', this.active);
       }
     },
-    goNext() {
+    goNext(): void {
       if (this.active < this.numberOfPages) {
         this.active += 1;
-        this.onChange(this.active);
+        this.$emit('change-page', this.active);
       }
     },
-    numberClick(i) {
+    numberClick(i): void {
       this.active = i;
-      this.onChange(i);
+      this.$emit('change-page', i);
     },
-    getNumberClass(i) {
+    getNumberClass(i): Object {
       const defaultClasses =
         'text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2';
       const activeClasses =

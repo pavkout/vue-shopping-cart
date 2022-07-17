@@ -51,14 +51,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import VAlert from '../Alert/index.vue';
-import { formatPrice } from '../../utils/index.ts';
+import { formatPrice } from '../../utils/index';
 
 import { useShoppingStore } from '../../store/shoppingCart';
 
 export default {
-  data() {
+  data(): Object {
     return {
       open: false,
     };
@@ -67,35 +67,36 @@ export default {
     VAlert,
   },
   computed: {
-    totalItems() {
+    totalItems(): Number {
       return useShoppingStore().getTotalItems;
     },
-    formatedPrice() {
+    formatedPrice(): String {
       return formatPrice('€', useShoppingStore().getTotalPrice);
     },
-    isCheckoutDisabled() {
+    isCheckoutDisabled(): Boolean {
       return this.totalItems === 0;
     },
-    checkoutClasses() {
+    checkoutClasses(): Object {
       return {
-        'flex items-center justify-center w-full rounded-md border border-transparent bg-purple-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-purple-700': true,
+        'flex items-center justify-center w-full rounded-md border border-transparent bg-purple-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-purple-700':
+          true,
         'bg-gray-400 cursor-not-allowed hover:bg-gray-400':
           this.totalItems === 0,
       };
     },
   },
   methods: {
-    onClose() {
+    onClose(): void {
       useShoppingStore().closeCart();
     },
-    onErase() {
+    onErase(): void {
       this.open = true;
     },
-    onEraseConfirm() {
+    onEraseConfirm(): void {
       this.open = false;
       useShoppingStore().resetCart();
     },
-    onEraseReject() {
+    onEraseReject(): void {
       this.open = false;
     },
   },

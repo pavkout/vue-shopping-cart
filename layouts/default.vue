@@ -8,13 +8,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import VHeader from '../components/Header/index.vue';
 import VFooter from '../components/Footer/index.vue';
 import HeroImage from '../components/HeroImage/index.vue';
 import ThemeSwitcher from '../components/ThemeSwitcher/index.vue';
-
-import { useThemeStore } from '../store/theme.ts';
 
 export default {
   components: {

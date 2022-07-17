@@ -166,10 +166,10 @@
   </footer>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   computed: {
-    getYear() {
+    getYear(): Number {
       return new Date().getFullYear();
     },
   },
