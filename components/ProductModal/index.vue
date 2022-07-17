@@ -112,7 +112,7 @@
                       </p>
                       <div class="flex justify-center items-center mt-6 gap-4">
                         <item-quantity
-                          internalState="true"
+                          :internalState="true"
                           :gtin="product.gtin"
                           :quantity="selectedQuantity"
                           @increase-quantity="addQuantity"

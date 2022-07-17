@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia';
-import storage from 'nuxt-storage/local-storage/index.js';
-
-const { getData } = storage;
+import { getData } from 'nuxt-storage/local-storage/index.js';
 
 const state = () => ({
   dark: getData('theme') === 'dark',
