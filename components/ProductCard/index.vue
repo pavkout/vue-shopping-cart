@@ -6,9 +6,7 @@
       <img
         :src="product.imageUrl"
         alt="Product Image"
-        class="object-contain w-full h-64 dark:bg-gray-800"
-        height="300"
-        width="220"
+        class="object-contain w-full h-64 dark:bg-gray-800 product-image"
       />
     </figure>
     <div class="flex justify-between">
@@ -66,3 +64,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.product-image {
+  width: 220px;
+  height: 300px;
+}
+</style>
