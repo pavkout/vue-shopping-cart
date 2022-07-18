@@ -30,7 +30,8 @@
 </template>
 
 <script lang="ts">
-import { PropType } from 'vue';
+// @ts-ignore
+import type { PropType } from 'vue';
 
 import { ShoppingCartIcon } from '@heroicons/vue/outline/index.js';
 

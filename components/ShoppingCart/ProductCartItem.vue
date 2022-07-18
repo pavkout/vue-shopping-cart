@@ -44,7 +44,8 @@
 </template>
 
 <script lang="ts">
-import { PropType } from 'vue';
+// @ts-ignore
+import type { PropType } from 'vue';
 
 import ItemQuantity from '../ItemQuantity/index.vue';
 import { formatPrice, calculateAmountWithQuantity } from '../../utils/index';
