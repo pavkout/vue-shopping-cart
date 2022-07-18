@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { getData, setData } from 'nuxt-storage/local-storage';
+import { getData, setData } from '../../utils/localStorage';
 
 import { useThemeStore } from '../../store/theme';
 
