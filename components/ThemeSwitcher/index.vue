@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import nuxtStorage from 'nuxt-storage';
+import { getData, setData } from 'nuxt-storage/local-storage';
 
 import { useThemeStore } from '../../store/theme';
 
@@ -60,20 +60,20 @@ export default {
     },
   },
   mounted(): void {
-    if (nuxtStorage.localStorage.getData('theme') === undefined) {
+    if (getData('theme') === undefined) {
       if (
         window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches
       ) {
-        nuxtStorage.localStorage.setData('theme', 'dark', 24, 'h');
+        setData('theme', 'dark', 24, 'h');
         useThemeStore().setDark(true);
         document.documentElement.classList.add('dark');
       } else {
-        nuxtStorage.localStorage.setData('theme', 'light', 24, 'h');
+        setData('theme', 'light', 24, 'h');
         document.documentElement.classList.remove('dark');
       }
     } else {
-      const isDark = nuxtStorage.localStorage.getData('theme') === 'dark';
+      const isDark = getData('theme') === 'dark';
       useThemeStore().setDark(isDark);
       document.documentElement.classList.remove('light');
       document.documentElement.classList.remove('dark');
@@ -83,12 +83,7 @@ export default {
   methods: {
     toggleDarkMode(): void {
       useThemeStore().setDark(!this.dark);
-      nuxtStorage.localStorage.setData(
-        'theme',
-        this.dark ? 'dark' : 'light',
-        24,
-        'h'
-      );
+      setData('theme', this.dark ? 'dark' : 'light', 24, 'h');
       document.documentElement.classList.remove('light');
       document.documentElement.classList.remove('dark');
       document.documentElement.classList.add(this.dark ? 'dark' : 'light');
